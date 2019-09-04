@@ -20,6 +20,7 @@ void setup() {
     print("Starting in test mode...");
   } else {
     print("Starting in production mode!");
+    startupDance();
   }
 }
 
@@ -129,6 +130,15 @@ void shaveAndAHaircut() {
     "----------*-----",
     "----*-----*-----",
     "--**--*-----*---"
+  );
+}
+
+void startupDance(){
+  dance(
+    "*-----------------------",
+    "------*-----------------",
+    "------------*-----------",
+    "------------------*-----"
   );
 }
 
