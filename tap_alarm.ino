@@ -14,36 +14,36 @@ void setup() {
 }
 
 /// The loop to use in test
-void testLoop(){
-//  randomDance();
-  delay(10000);
+void testLoop() {
+  //  randomDance();
+  delay(30000);
 }
 
 /// The loop to use in production
 bool isReady = false;
 
-void productionLoop(){  
-//  if(isReady == false && ){
-//    /// 1. Plug it in at 8PM
-//    delayMinutes(2*60);
-//    
-//    /// 2. Start at 10PM
-//    isReady == true;
-//    
-//   } else if(count == 0){
-//    /// 4. 
-//   } else {
-//    /// 3. Dance every 45-75 minutes.
-//    randomDance();
-//    delayMinutes(45 + random(30));
-//   }
+void productionLoop() {
+  //  if(isReady == false && ){
+  //    /// 1. Plug it in at 8PM
+  //    delayMinutes(2*60);
+  //
+  //    /// 2. Start at 10PM
+  //    isReady == true;
+  //
+  //   } else if(count == 0){
+  //    /// 4.
+  //   } else {
+  //    /// 3. Dance every 45-75 minutes.
+  //    randomDance();
+  //    delayMinutes(45 + random(30));
+  //   }
 
-   
+
   delay(10000);
 }
 
 void loop() {
-  if(test == true){
+  if (test == true) {
     testLoop();
   } else {
     productionLoop();
@@ -52,8 +52,8 @@ void loop() {
 }
 
 /// Pick a dance at random, and do it! JUST DO IT!
-void randomDance(){
-  switch(random(1,5)){
+void randomDance() {
+  switch (random(1, 5)) {
     case 1:
       spinDance();
       break;
@@ -74,7 +74,7 @@ void randomDance(){
 }
 
 /// 1,2,3,4,3,2,1 repeat
-void spinDance(){
+void spinDance() {
   dance(
     "*-----*-----*-----*-----*-----*-----*---",
     "-*---*-*---*-*---*-*---*-*---*-*---*-*--",
@@ -95,7 +95,7 @@ void gallopDance() {
 }
 
 /// 1,2,3,4 repeat
-void twirlDance(){
+void twirlDance() {
   dance(
     "*---*---*---*---*---*---*---*---*---*---",
     "-*---*---*---*---*---*---*---*---*---*--",
@@ -117,7 +117,7 @@ void tapKnock() {
 /// Shave and a haircut, two bits!
 void shaveAndAHaircut() {
   dance(
-   //1.2.3.4.1.2.3.4.
+    //1.2.3.4.1.2.3.4.
     "*-----------*---",
     "----------*-----",
     "----*-----*-----",
@@ -130,32 +130,32 @@ void shaveAndAHaircut() {
 /// of the first string.
 ///
 /// eg "*---*---*---" is a single tap, three pauses, repeating three times
-void dance(String pin1, String pin2, String pin3, String pin4){
+void dance(String pin1, String pin2, String pin3, String pin4) {
   int dwell = 50;
   int tick = 100;
-  
-  for(int i=0; i<pin1.length(); i++){
+
+  for (int i = 0; i < pin1.length(); i++) {
     bool fire1 = pin1[i] == char('*');
     bool fire2 = pin2[i] == char('*');
     bool fire3 = pin3[i] == char('*');
     bool fire4 = pin4[i] == char('*');
-    
-    if(fire1){
+
+    if (fire1) {
       digitalWrite(r1, HIGH);
     }
 
-    if(fire2){
+    if (fire2) {
       digitalWrite(r2, HIGH);
     }
 
-    if(fire3){
+    if (fire3) {
       digitalWrite(r3, HIGH);
     }
 
-    if(fire4){
+    if (fire4) {
       digitalWrite(r4, HIGH);
     }
-    
+
     delay(dwell);
     allOff();
     delay(tick - dwell);
@@ -165,7 +165,7 @@ void dance(String pin1, String pin2, String pin3, String pin4){
 /// Turn all the solenoids off, a convenience method
 /// to make it easy to ensure things aren't being left on.
 /// Use liberally, apply where needed.
-void allOff(){
+void allOff() {
   digitalWrite(r1, LOW);
   digitalWrite(r2, LOW);
   digitalWrite(r3, LOW);
@@ -173,11 +173,11 @@ void allOff(){
 }
 
 /// A convenience method for printing to serial logs
-void print(String str){
-  Serial.print(str+"\n");
+void print(String str) {
+  Serial.print(str + "\n");
 }
 
-void delayMinutes(int minutes){
+void delayMinutes(int minutes) {
   delay(minutes * 60 * 1000);
 }
 
@@ -190,5 +190,5 @@ void delayMinutes(int minutes){
 //double startTime = 8;
 //
 //double currentTime(){
-//  initialHours  
+//  initialHours
 //}
