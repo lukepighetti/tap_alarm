@@ -1,6 +1,6 @@
 #include <math.h>
 
-bool test = true;
+bool test = false;
 
 int r1 = 4;
 int r2 = 5;
@@ -32,7 +32,7 @@ void testLoop() {
 /// The loop to use in production
 void productionLoop() {
   /// From 11PM - 5AM, do a random dance every 45-60 minutes
-  if(currentTime() > 23 || currentTime() < 5){
+  if(currentTime() >= 23 || currentTime() <= 5){
     randomDance();
     delayMinutes(45 + random(15));
   }
