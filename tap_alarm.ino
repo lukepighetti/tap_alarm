@@ -1,3 +1,5 @@
+#include <math.h>
+
 bool test = true;
 
 int r1 = 4;
@@ -11,35 +13,32 @@ void setup() {
   pinMode(r2, OUTPUT);
   pinMode(r3, OUTPUT);
   pinMode(r4, OUTPUT);
+  
+  setTime(20); /// 8PM in 24hr time
 }
 
 /// The loop to use in test
 void testLoop() {
-  //  randomDance();
-  delay(30000);
+  if(currentTime() >= 20.01 && currentTime() <= 20.02){
+    print("Do a randomDance()!");
+    randomDance();
+  }
+
+  print("currentTime() -> " + String(currentTime()));
+  
+  delay(5000);
 }
 
 /// The loop to use in production
-bool isReady = false;
-
 void productionLoop() {
-  //  if(isReady == false && ){
-  //    /// 1. Plug it in at 8PM
-  //    delayMinutes(2*60);
-  //
-  //    /// 2. Start at 10PM
-  //    isReady == true;
-  //
-  //   } else if(count == 0){
-  //    /// 4.
-  //   } else {
-  //    /// 3. Dance every 45-75 minutes.
-  //    randomDance();
-  //    delayMinutes(45 + random(30));
-  //   }
+  /// From 11PM - 5AM, do a random dance every 45-60 minutes
+  if(currentTime() > 23 || currentTime() < 5){
+    randomDance();
+    delayMinutes(45 + random(15));
+  }
 
-
-  delay(10000);
+  /// Throw in a minute delay just in case we get a race condition
+  delayMinutes(1);
 }
 
 void loop() {
@@ -71,6 +70,8 @@ void randomDance() {
       shaveAndAHaircut();
       break;
   }
+
+  allOff();
 }
 
 /// 1,2,3,4,3,2,1 repeat
@@ -181,14 +182,18 @@ void delayMinutes(int minutes) {
   delay(minutes * 60 * 1000);
 }
 
-///// A convenience method for returning the current time in hours.
-//double hours(){
-//  return millis() / ( 60 * 60 * 1000);
-//}
-//
-//double initialHours = hours();
-//double startTime = 8;
-//
-//double currentTime(){
-//  initialHours
-//}
+/// A collection of convenience methods to provide us the ability to 
+/// schedule tasks by the hour
+double timeOffset = 0;
+
+double setTime(double hours){
+  timeOffset = hours;
+}
+
+double currentHours(){
+  return ((double) millis()) / 60 / 60 / 1000;
+}
+
+double currentTime(){
+  return fmod(currentHours(), 24) + timeOffset;
+}
