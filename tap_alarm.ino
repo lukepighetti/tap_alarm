@@ -13,26 +13,32 @@ void setup() {
   pinMode(r2, OUTPUT);
   pinMode(r3, OUTPUT);
   pinMode(r4, OUTPUT);
-  
+
   setTime(20); /// 8PM in 24hr time
+
+  if (test == true) {
+    print("Starting in test mode...");
+  } else {
+    print("Starting in production mode!");
+  }
 }
 
 /// The loop to use in test
 void testLoop() {
-  if(currentTime() >= 20.01 && currentTime() <= 20.02){
+  if (currentTime() >= 20.01 && currentTime() <= 20.02) {
     print("Do a randomDance()!");
     randomDance();
   }
 
   print("currentTime() -> " + String(currentTime()));
-  
+
   delay(5000);
 }
 
 /// The loop to use in production
 void productionLoop() {
   /// From 11PM - 5AM, do a random dance every 45-60 minutes
-  if(currentTime() >= 23 || currentTime() <= 5){
+  if (currentTime() >= 23 || currentTime() <= 5) {
     randomDance();
     delayMinutes(45 + random(15));
   }
@@ -182,18 +188,18 @@ void delayMinutes(int minutes) {
   delay(minutes * 60 * 1000);
 }
 
-/// A collection of convenience methods to provide us the ability to 
+/// A collection of convenience methods to provide us the ability to
 /// schedule tasks by the hour
 double timeOffset = 0;
 
-double setTime(double hours){
+double setTime(double hours) {
   timeOffset = hours;
 }
 
-double currentHours(){
+double currentHours() {
   return ((double) millis()) / 60 / 60 / 1000;
 }
 
-double currentTime(){
+double currentTime() {
   return fmod(currentHours(), 24) + timeOffset;
 }
