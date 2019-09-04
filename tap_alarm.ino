@@ -133,7 +133,7 @@ void shaveAndAHaircut() {
   );
 }
 
-void startupDance(){
+void startupDance() {
   dance(
     "*-----------------------",
     "------*-----------------",
@@ -195,7 +195,7 @@ void print(String str) {
 }
 
 void delayMinutes(int minutes) {
-  delay(minutes * 60 * 1000);
+  delay((unsigned long)minutes * (unsigned long)60 * (unsigned long)1000);
 }
 
 /// A collection of convenience methods to provide us the ability to
